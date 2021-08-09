@@ -35,15 +35,15 @@ const BlogPage = () => {
           >
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-vcenter">
-                {singleBlog.title}
+                {singleBlog?.title}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <p>
-                {singleBlog.content}
+                {singleBlog?.content}
               </p>
               <p>
-                  {singleBlog.author}
+                  {singleBlog?.author}
               </p>
             </Modal.Body>
             <Modal.Footer>

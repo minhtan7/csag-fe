@@ -27,7 +27,7 @@ const getSingleBlog = ({selectedId}) => async (dispatch) => {
         console.log(url)
         let resp = await axios.get(url)
 
-        const data = resp.data.data
+        const data = resp.data.data.blog
         console.log(resp)
         
         console.log(data)
