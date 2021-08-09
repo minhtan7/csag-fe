@@ -5,7 +5,7 @@ import "./Style.css";
 import motobike from "../../image/shipper12.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const ShipmentCard = () => {
+const ShipmentCard = ({ order, handleClick }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -13,7 +13,7 @@ const ShipmentCard = () => {
         <div className="shipment_Contents">
           <div>
             <img
-              src="https://thumbs.dreamstime.com/b/charity-helping-children-vector-illustration-153939332.jpg"
+              src={order?.images ? order.images[0] : "holder.js/300px160"}
               alt="img-delivery"
               className="itemShipment_Img"
             />
@@ -25,7 +25,7 @@ const ShipmentCard = () => {
                   <Badge style={{ "text-indent": "0.5em" }} bg="success">
                     From
                   </Badge>
-                  Chung Cu Green Valley, Dist 7, HCM
+                  {` ${order.from.address}`}
                 </h5>
               </div>
               <div className="toReceipt">
@@ -34,7 +34,7 @@ const ShipmentCard = () => {
                   <Badge style={{ "text-indent": "0.5em" }} bg="danger">
                     To
                   </Badge>
-                  Sunrise City,Dist 7, HCM
+                  {` ${order.to.address}`}
                 </h5>
               </div>
 
@@ -43,6 +43,7 @@ const ShipmentCard = () => {
                   Products
                 </Button>
                 <ModalShipment
+                  order={order}
                   showModal={showModal}
                   setShowModal={setShowModal}
                 />
@@ -51,8 +52,13 @@ const ShipmentCard = () => {
             <div className="shipment_bottom"></div>
           </div>
           <div className="shipment_Contact">
-            <Button variant="outline-success">Contact</Button>
-            <div className="shipment_Location">Location:Dist 7, HCM</div>
+            <Button
+              variant="outline-success"
+              onClick={() => handleClick(order._id)}
+            >
+              Contact
+            </Button>
+            <div className="shipment_Location">{`Location: HCM`}</div>
           </div>
         </div>
       </Container>

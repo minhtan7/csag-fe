@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Modal, Row } from "react-bootstrap";
 
-const ModalShipment = ({ showModal, setShowModal }) => {
+const ModalShipment = ({ showModal, setShowModal, order }) => {
   const handleClose = () => setShowModal(false);
   return (
     <div>
@@ -16,17 +16,25 @@ const ModalShipment = ({ showModal, setShowModal }) => {
           <Modal.Title id="contained-modal-title-vcenter">Products</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Foods</h4>
-          <Row>
-            <Col>
-              <p>Rice</p>
-              <p>Eggs</p>
-            </Col>
-            <Col>
-              <p>10kgs</p>
-              <p>20 eggs</p>
-            </Col>
-          </Row>
+          {order?.items ? (
+            <>
+              {order.items.map((item) => (
+                <>
+                  <h4>{item.category}</h4>
+                  <Row>
+                    <Col>
+                      <p>{item.name}</p>
+                    </Col>
+                    <Col>
+                      <p>{`${item.quantity} ${item.unit}`}</p>
+                    </Col>
+                  </Row>
+                </>
+              ))}
+            </>
+          ) : (
+            <p>There are no shipments</p>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose}>Close</Button>

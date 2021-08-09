@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import shpimentReducer from "./shipment.reducer.";
+import orderReducer from "./order.reducer";
 export default combineReducers({
-  shipment: shpimentReducer,
+  order: orderReducer,
 });
