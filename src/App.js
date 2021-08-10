@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -8,6 +7,8 @@ import PublicNav from "./components/PublicNav/PublicNav";
 import BlogPage from "./pages/BlogPage/BlogPage";
 import ShipperProfilePage from "./pages/ShipperProfilePage";
 
+
+
 function App() {
   return (
     <Router>
@@ -16,7 +17,7 @@ function App() {
         <Route exact path="/" component={Hompage} />
         <Route path="/shipper" component={ShipperPage} />
         <Route path="/blogpage" component={BlogPage} />
-        <Route path="/profile" component={ShipperProfilePage} />
+        <Route path="/shippershipments" component={ShipperProfilePage} />
 
       </Switch>
     </Router>

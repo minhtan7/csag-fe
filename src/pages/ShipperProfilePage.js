@@ -10,7 +10,6 @@ const ShipperProfilePage = () => {
 
                 </div>
 
-
                 <div className="blog-right-side">
                     <div className="blog-text">
                         <h2>A</h2>
