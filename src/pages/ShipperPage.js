@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PublicNavbar from "../components/PublicNavbar/PublicNavbar";
+
 import SearchForm from "../components/SearchForm/SearchForm";
 import { useSelector, useDispatch } from "react-redux";
 import ShipmentCard from "../components/ShipmentCard/ShipmentCard";
@@ -13,7 +13,6 @@ const ShipperPage = () => {
   const [pageNum, setPageNum] = useState(1);
   const loading = useSelector((state) => state.order.loading);
   const orders = useSelector((state) => state.order.orders);
-  console.log("ordersorders", orders);
   const totalPageNum = useSelector((state) => state.order.totalPageNum);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,7 +26,6 @@ const ShipperPage = () => {
   };
   return (
     <>
-      <PublicNavbar />
       <ShipmentSlider />
       <SearchForm />
       <Container>
