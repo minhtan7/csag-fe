@@ -3,7 +3,6 @@ import { Badge, Button, Container } from "react-bootstrap";
 import ModalShipment from "../ModalShipment/ModalShipment";
 import "./Style.css";
 import motobike from "../../image/shipper12.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ShipmentCard = ({ order, handleClick }) => {
   const [showModal, setShowModal] = useState(false);
@@ -59,6 +58,9 @@ const ShipmentCard = ({ order, handleClick }) => {
               Contact
             </Button>
             <div className="shipment_Location">{`Location: HCM`}</div>
+            <Button variant="warning" onClick={() => setShowModal(true)}>
+              Nhận Đơn
+            </Button>
           </div>
         </div>
       </Container>
