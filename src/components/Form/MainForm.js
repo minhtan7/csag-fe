@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
@@ -11,20 +10,6 @@ import { faTimes, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { formActions } from '../../redux/actions/form.action';
 import Donate from '../Donate';
 import Receiver from './Receiver';
-=======
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CSSTransition } from "react-transition-group";
-import SecondForm from "./SecondForm";
-import IndexForm from "./IndexForm";
-import SubCategory from "./SubCategory";
-import MatchingForm from "./MatchingForm";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { formActions } from "../../redux/actions/form.action";
-import Donate from "../Donate";
-import Receiver from "./Receiver";
->>>>>>> e3ce03a4f014512e9d6aaf23bd7db94c3c1b66b9
 
 const MainForm = ({ handleClose }) => {
 	const page = useSelector((state) => state.form.page);
