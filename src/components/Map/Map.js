@@ -7,11 +7,10 @@ import {
 } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import Geocode from "react-geocode";
-import { Button, Form } from "react-bootstrap";
+
 import "./style.css";
 
 const Map = ({ users }) => {
-  const [formData, setFormData] = useState({ address: "", content: "" });
   const [geocode, setGeocode] = useState({
     lat: 10.77788992345464,
     lng: 106.69517319605292,
@@ -70,24 +69,6 @@ const Map = ({ users }) => {
   //     console.error(error);
   //   }
   // );
-
-  const handleOnChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const fetchgeocode = await Geocode.fromAddress(formData.address).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        return { lat, lng };
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-    setGeocode(fetchgeocode);
-  };
 
   // const givers = users?.filter((user)=>user.role === 'giver')
 

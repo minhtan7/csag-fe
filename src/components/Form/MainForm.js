@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CSSTransition, SwitchTransition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import SecondForm from "./SecondForm";
 import IndexForm from "./IndexForm";
 import SubCategory from "./SubCategory";
@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { formActions } from "../../redux/actions/form.action";
 import Donate from "../Donate";
-import { Button } from "react-bootstrap";
 import Receiver from "./Receiver";
 
 const MainForm = ({ handleClose }) => {

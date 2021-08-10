@@ -16,7 +16,7 @@ const Hompage = () => {
     dispatch(formActions.changePage("index"));
   };
   const handleShow = () => setShow(true);
-  const loading = useSelector((state) => state.user.loading);
+
   const users = useSelector((state) => state.user.users);
   let pageNum;
   let limit = 2000;
