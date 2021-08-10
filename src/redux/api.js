@@ -5,7 +5,7 @@ const api = axios.create({
 	baseURL: process.env.REACT_APP_URL + '/api',
 	headers: {
 		'Content-Type': 'application/json',
-		authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
 	},
 });
 /**
