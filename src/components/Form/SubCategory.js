@@ -10,6 +10,9 @@ const SubCategory = () => {
 	const choice = menu[page]?.items?.find((item) => item.type === subPage);
 	const [quantity, setQuantity] = useState(0);
 	const dispatch = useDispatch();
+	const submit = () => {
+		dispatch(formActions.addItem({ name: choice.text, category: page, quantity, unit: choice.unit }));
+	};
 	if (!choice) return <div></div>;
 	return (
 		<div className="border text-center user-select-none" style={{ borderRadius: 20 }}>
@@ -50,7 +53,9 @@ const SubCategory = () => {
 				<Button variant="danger" className="me-3" onClick={() => dispatch(formActions.changePage('index'))}>
 					Hủy
 				</Button>
-				<Button variant="success">Hoàn tất</Button>
+				<Button variant="success" onClick={submit} disabled={!quantity > 0}>
+					Hoàn tất
+				</Button>
 			</div>
 		</div>
 	);

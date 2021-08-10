@@ -68,6 +68,12 @@ const initialState = {
 const formReducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
+		case types.ADD_ITEM:
+			const existingIndex = state.items.findIndex((item) => item.name === payload.name);
+			if (state.items.length === 0 || existingIndex < 0) {
+				return { ...state, items: [...state.items, payload] };
+			}
+			return { ...state };
 		case types.CHANGE_PAGE:
 			return { ...state, page: payload, subPage: null };
 		case types.CHANGE_SUBPAGE:

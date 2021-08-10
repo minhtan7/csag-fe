@@ -3,7 +3,7 @@ import api from '../api';
 import { toast } from 'react-toastify';
 
 const addItem = (item) => async (dispatch) => {
-	dispatch({ type: types.ADD_ITEM, payload: null });
+	dispatch({ type: types.ADD_ITEM, payload: item });
 	try {
 		toast.success('New item added!');
 	} catch (err) {
