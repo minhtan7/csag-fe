@@ -1,0 +1,12 @@
+/* .navbar-nav {
+    background-color: rgba(0,0,0,0.5) !important;
+    
+} */
+.bg-mynav {
+    background-color: rgba(0,0,0,0.5) !important;
+
+}
+.navbar a {
+    color: white!important;
+    text-decoration: none
+}
