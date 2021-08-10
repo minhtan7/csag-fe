@@ -1,5 +1,7 @@
-import { combineReducers } from "redux";
-import shpimentReducer from "./shipment.reducer.";
+import { combineReducers } from 'redux';
+import formReducer from './form.reducer';
+import shpimentReducer from './shipment.reducer.';
 export default combineReducers({
-  shipment: shpimentReducer,
+	shipment: shpimentReducer,
+	form: formReducer,
 });

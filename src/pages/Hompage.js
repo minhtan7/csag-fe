@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react';
+import MainForm from '../components/Form/MainForm';
 
 const Hompage = () => {
-  return <div>This is homepage</div>;
+	return (
+		<div className="page d-flex justify-content-center">
+			<MainForm />
+		</div>
+	);
 };
 
 export default Hompage;
