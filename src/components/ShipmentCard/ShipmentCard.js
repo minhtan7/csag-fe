@@ -23,7 +23,7 @@ const ShipmentCard = ({ order, handleClick }) => {
                   <Badge style={{ "text-indent": "0.5em" }} bg="success">
                     From
                   </Badge>
-                  {` ${order.from.address}`}
+                  {` ${order.from?.address}`}
                 </h5>
               </div>
               <div className="toReceipt">
@@ -32,7 +32,7 @@ const ShipmentCard = ({ order, handleClick }) => {
                   <Badge style={{ "text-indent": "0.5em" }} bg="danger">
                     To
                   </Badge>
-                  {` ${order.to.address}`}
+                  {` ${order.to?.address}`}
                 </h5>
               </div>
 
