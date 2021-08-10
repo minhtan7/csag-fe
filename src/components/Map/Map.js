@@ -3,6 +3,7 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
+  MarkerClusterer
 } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import Geocode from "react-geocode";
@@ -88,6 +89,20 @@ const Map = ({ users }) => {
     setGeocode(fetchgeocode);
   };
 
+
+  // const givers = users?.filter((user)=>user.role === 'giver')
+  
+  const locations = users?.map((user)=>user.geocode) 
+  
+  const options = {
+    imagePath:
+      'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', // so you must have m1.png, m2.png, m3.png, m4.png, m5.png and m6.png in that folder
+  }
+  
+  function createKey(location) {
+    return location.lat + location.lng
+  }
+  console.log(locations)
   return (
     /* <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formAddress">
@@ -103,19 +118,39 @@ const Map = ({ users }) => {
             <Button variant="primary" type="submit">
                 Submit
             </Button>
-        </Form> */
-    <LoadScript googleMapsApiKey={REACT_APP_GOOGLE_API}>
+            </Form> */
+            <LoadScript googleMapsApiKey={REACT_APP_GOOGLE_API}>
       <GoogleMap mapContainerStyle={containerStyle} center={geocode} zoom={16}>
-        <Marker onLoad={onLoad} position={{ ...geocode }} />
-        {users?.map((user) => {
-          return (
+        
+      <Marker onLoad={onLoad} position={{ ...geocode }} icon="https://res.cloudinary.com/tanvo/image/upload/v1628611223/logo-current_jkrou3.png"/>
+        
+        {/* {users?.map((user) => {
+          return (  
             <Marker
-              onLoad={onLoad}
-              position={{ lat: user.geocode.lng, lng: user.geocode.lat }}
+            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+            onLoad={onLoad}
+            position={{ lat: user.geocode.lng, lng: user.geocode.lat }}
+            
             />
           );
-        })}
+        })} */}
 
+        <MarkerClusterer gridSize={150} options={options} averageCenter={true}>
+          {(clusterer) => 
+            
+            // givers?.map((giver)=> {
+            //   <Marker key={createKey(giver.geocode)} icon="https://toppng.com/uploads/preview/oogle-maps-orange-marker-11563035292hvdwagasje.png" position={{lat: giver.geocode.lng, lng: giver.geocode.lat}} clusterer={clusterer} />
+            // })
+            
+            
+            users?.map((user) => {
+                if (user.role === "giver") return <Marker key={createKey(user.geocode)} position={{lat: user.geocode.lng, lng: user.geocode.lat}} icon="https://res.cloudinary.com/tanvo/image/upload/v1628611122/logo-receiver_uzfhf3.png" clusterer={clusterer} />
+                if (user.role === "recipient") return <Marker key={createKey(user.geocode)} position={{lat: user.geocode.lng, lng: user.geocode.lat}} icon="https://res.cloudinary.com/tanvo/image/upload/v1628611124/logo-giver-7_ffly1f.png"  clusterer={clusterer} />
+                
+            })
+            
+          }
+        </MarkerClusterer>
         <DistanceMatrixService
           options={{
             destinations: [{ lat: 10.80721641690156, lng: 106.68184289556997 }],
