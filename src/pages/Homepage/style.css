@@ -1,0 +1,13 @@
+#map-container {
+    width:100vw;
+    height: 100vh;
+    position: relative;
+}
+.join-button {
+    position:absolute;
+    z-index: 9;
+    bottom:2rem;
+    left:50%;
+    transform: translate(-50%,0);
+}
+
