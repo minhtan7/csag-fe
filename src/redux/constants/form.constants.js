@@ -1,0 +1,3 @@
+export const ADD_ITEM = 'FORM.ADD_ITEM';
+export const CHANGE_PAGE = 'FORM.CHANGE_PAGE';
+export const CHANGE_SUBPAGE = 'FORM.CHANGE_SUBPAGE';
