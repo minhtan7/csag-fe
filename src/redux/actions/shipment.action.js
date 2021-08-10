@@ -17,10 +17,10 @@ const shipmentsRequest =
 			}
 			const res = await api.get(`/shipments?page=${pageNum}&limit=${limit}${queryString}${sortByString}`);
 
-			console.log('Shipments???', res);
+			// console.log('Shipments???', res);
 			dispatch({ type: types.GET_SHIPMENTS_SUCCESS, payload: res.data.data });
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 			dispatch({ type: types.GET_SHIPMENTS_FAILURE, payload: err });
 		}
 	};

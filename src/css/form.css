@@ -64,23 +64,25 @@
 
 @media screen and (min-width: 576px) {
 	.form-modal-content {
-		top: 50px;
+		top: 50%;
+		transform: translateY(-50%);
+		height: 80vh;
 	}
 }
-.form-enter {
+.form-transition-enter {
 	opacity: 0;
 }
 
-.form-enter-active {
+.form-transition-enter-active {
 	opacity: 1;
 	transition: opacity 0.3s cubic-bezier(0.6, 1, 0.15, 1);
 }
 
-.form-exit {
+.form-transition-exit {
 	opacity: 1;
 }
 
-.form-exit-active {
+.form-transition-exit-active {
 	opacity: 0;
 	transition: opacity 0.3s cubic-bezier(0.15, 1, 0.3, 1);
 }
@@ -121,6 +123,13 @@
 	transition-duration: 0.3s;
 	background: rgb(230, 130, 181);
 	background: linear-gradient(23deg, rgba(230, 130, 181, 1) 0%, rgba(255, 223, 255, 1) 100%);
+}
+.form-matching {
+	transition-duration: 0.3s;
+	background: rgb(0 224 227);
+}
+.form-matching .form-button-text {
+	margin: auto;
 }
 .form-hover {
 	user-select: none;
@@ -175,4 +184,24 @@
 .form-back-icon.disabled {
 	color: rgb(212, 212, 212);
 	cursor: default;
+}
+
+.matching-receiver {
+	padding: 15px 25px;
+	margin: 10px;
+	border: 1px solid #888888;
+	border-radius: 15px;
+	cursor: pointer;
+}
+.giver-btn {
+	text-align: center;
+	margin-top: 1rem;
+}
+.giver-btn button {
+	width: 13rem;
+	background-color: teal;
+	border: none;
+}
+.giver-btn button:hover {
+	background-color: #0ea7a7 !important;
 }

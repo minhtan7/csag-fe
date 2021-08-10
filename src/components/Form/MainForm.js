@@ -4,10 +4,12 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import SecondForm from './SecondForm';
 import IndexForm from './IndexForm';
 import SubCategory from './SubCategory';
+import MatchingForm from './MatchingForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { formActions } from '../../redux/actions/form.action';
 import Donate from '../Donate';
+import Receiver from './Receiver';
 
 const MainForm = ({ handleClose }) => {
 	const page = useSelector((state) => state.form.page);
@@ -21,7 +23,9 @@ const MainForm = ({ handleClose }) => {
 		}
 	};
 	const CurrentForm = () => {
-		if (subPage) {
+		if (subPage === 'receiver') {
+			return <Receiver />;
+		} else if (subPage) {
 			return <SubCategory />;
 		} else
 			switch (page) {
@@ -29,6 +33,8 @@ const MainForm = ({ handleClose }) => {
 					return <IndexForm />;
 				case 'donate':
 					return <Donate />;
+				case 'matching':
+					return <MatchingForm />;
 				default:
 					return <SecondForm page={page} />;
 			}
@@ -40,7 +46,7 @@ const MainForm = ({ handleClose }) => {
 			<FontAwesomeIcon className="form-close-icon" icon={faTimes} size="2x" onClick={handleClose} />
 			<div className="form-title">Bạn có thể trao gì?</div>
 			<SwitchTransition>
-				<CSSTransition key={[page, subPage]} timeout={{ enter: 300, exit: 300 }} classNames="form">
+				<CSSTransition key={[page, subPage]} timeout={{ enter: 300, exit: 300 }} classNames="form-transition">
 					<div>
 						<CurrentForm />
 					</div>

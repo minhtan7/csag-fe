@@ -11,7 +11,7 @@ const Login = ({ handleClose }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(authActions.loginRequest({ phone, password }));
-		handleClose();
+		// handleClose();
 	};
 	return (
 		<div className="m-3 d-flex flex-column main-form w-100">

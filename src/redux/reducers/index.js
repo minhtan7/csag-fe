@@ -5,6 +5,7 @@ import formReducer from './form.reducer';
 import userReducer from './user.reducer';
 import routeReducer from './route.reducer';
 import authReducer from './auth.reducer';
+import mapReducers from './map.reducer';
 
 export default combineReducers({
 	blogReducer: blogReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
 	user: userReducer,
 	route: routeReducer,
 	auth: authReducer,
+	map: mapReducers,
 });

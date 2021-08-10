@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/actions/form.action';
 
 const SecondForm = ({ page }) => {
-	console.log(page);
 	const choices = useSelector((state) => state.form.menu[page].items);
 	const dispatch = useDispatch();
 	return (

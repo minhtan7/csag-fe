@@ -17,7 +17,7 @@ const center = {
 };
 
 const onLoad = (marker) => {
-	console.log('marker: ', marker);
+	// console.log('marker: ', marker);
 };
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
@@ -51,7 +51,6 @@ Geocode.enableDebug();
 //     console.error(error);
 //   }
 // );
-
 
 const Hompage = () => {
 	useEffect(() => {

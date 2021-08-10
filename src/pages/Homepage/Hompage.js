@@ -8,33 +8,37 @@ import { formActions } from '../../redux/actions/form.action';
 import { userActions } from '../../redux/actions/user.actions';
 import './style.css';
 import Login from '../../components/Login/Login';
+import MarkerPopup from '../../components/Map/MarkerPopup';
+import { mapActions } from '../../redux/actions/map.actions';
 
 const Hompage = () => {
+	const user = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
 	const handleClose = () => {
 		setShow(false);
 		dispatch(formActions.changePage('index'));
 	};
+
 	const handleShow = () => setShow(true);
 	const loading = useSelector((state) => state.user.loading);
 	const users = useSelector((state) => state.user.users);
+	const marker = useSelector((state) => state.map.selectedMarker);
 	let pageNum;
-	let limit = 100;
-	// useEffect(() => {
-	// 	dispatch(userActions.getAllUsers({ pageNum, limit }));
-	// }, []);
+	let limit = 2000;
+	useEffect(() => {
+		dispatch(userActions.getAllUsers({ pageNum, limit }));
+	}, []);
 
 	return (
 		<div id="map-container">
-			<Map users={users} />
-			<Modal show={show} onHide={handleClose} fullscreen="sm-down" contentClassName="form-modal-content" scrollable>
+			<Map users={users} setShow={setShow} />
+			<Modal show={show} onHide={handleClose} onExited={() => dispatch(mapActions.unselectMarker())} fullscreen="sm-down" contentClassName="form-modal-content" scrollable>
 				{/* <Modal.Header closeButton>
 					<Modal.Title>Modal heading</Modal.Title>
 				</Modal.Header> */}
 				<Modal.Body className="d-flex justify-content-center p-0 main-form-modal">
-					{/* <MainForm handleClose={handleClose} /> */}
-					<Login handleClose={handleClose} />
+					{marker.name ? <MarkerPopup handleClose={handleClose} /> : user?.name ? <MainForm handleClose={handleClose} /> : <Login handleClose={handleClose} />}
 				</Modal.Body>
 				{/* <Modal.Footer></Modal.Footer> */}
 			</Modal>

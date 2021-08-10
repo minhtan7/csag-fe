@@ -1,10 +1,13 @@
-import { DistanceMatrixService, GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { DistanceMatrixService, GoogleMap, LoadScript, Marker, MarkerClusterer } from '@react-google-maps/api';
 import React, { useEffect, useState } from 'react';
 import Geocode from 'react-geocode';
 import { Button, Form } from 'react-bootstrap';
 import './style.css';
+import { useDispatch } from 'react-redux';
+import { mapActions } from '../../redux/actions/map.actions';
 
-const Map = ({ users }) => {
+const Map = ({ users, setShow }) => {
+	const dispatch = useDispatch();
 	const [formData, setFormData] = useState({ address: '', content: '' });
 	const [geocode, setGeocode] = useState({
 		lat: 10.77788992345464,
@@ -14,16 +17,16 @@ const Map = ({ users }) => {
 	useEffect(() => {
 		if ('geolocation' in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
-				console.log('Latitude is :', position.coords.latitude);
+				// console.log('Latitude is :', position.coords.latitude);
 				setGeocode({ ...geocode, lat: position.coords.latitude });
-				console.log('Longitude is :', position.coords.longitude);
+				// console.log('Longitude is :', position.coords.longitude);
 				setGeocode({ ...geocode, lng: position.coords.longitude });
 			});
 		}
 	}, []);
 
 	const REACT_APP_GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
-	console.log(REACT_APP_GOOGLE_API);
+	// console.log(REACT_APP_GOOGLE_API);
 	const containerStyle = {
 		width: '100%',
 		height: '100%',
@@ -64,7 +67,10 @@ const Map = ({ users }) => {
 	//     console.error(error);
 	//   }
 	// );
-
+	const showUserModal = (user) => {
+		dispatch(mapActions.selectMarker(user));
+		setShow(true);
+	};
 	const handleOnChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
@@ -83,6 +89,18 @@ const Map = ({ users }) => {
 		setGeocode(fetchgeocode);
 	};
 
+	// const givers = users?.filter((user)=>user.role === 'giver')
+
+	const locations = users?.map((user) => user.geocode);
+
+	const options = {
+		imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', // so you must have m1.png, m2.png, m3.png, m4.png, m5.png and m6.png in that folder
+	};
+
+	function createKey(location) {
+		return location.lat + location.lng;
+	}
+	// console.log(locations);
 	return (
 		/* <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formAddress">
@@ -98,21 +116,53 @@ const Map = ({ users }) => {
             <Button variant="primary" type="submit">
                 Submit
             </Button>
-        </Form> */
+            </Form> */
 		<LoadScript googleMapsApiKey={REACT_APP_GOOGLE_API}>
-			<GoogleMap
-				mapContainerStyle={containerStyle}
-				center={geocode}
-				zoom={16}
-				options={{
-					fullscreenControl: false,
-				}}
-			>
+			<GoogleMap mapContainerStyle={containerStyle} center={geocode} zoom={16}>
 				<Marker onLoad={onLoad} position={{ ...geocode }} />
-				{users?.map((user) => {
-					return <Marker onLoad={onLoad} position={{ lat: user.geocode.lng, lng: user.geocode.lat }} />;
-				})}
 
+				{/* {users?.map((user) => {
+          return (
+            <Marker
+            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+            onLoad={onLoad}
+            position={{ lat: user.geocode.lng, lng: user.geocode.lat }}
+
+            />
+          );
+        })} */}
+
+				<MarkerClusterer gridSize={150} options={options} averageCenter={true}>
+					{(clusterer) =>
+						// givers?.map((giver)=> {
+						//   <Marker key={createKey(giver.geocode)} icon="https://toppng.com/uploads/preview/oogle-maps-orange-marker-11563035292hvdwagasje.png" position={{lat: giver.geocode.lng, lng: giver.geocode.lat}} clusterer={clusterer} />
+						// })
+
+						users?.map((user) => {
+							if (user.role === 'giver')
+								return (
+									<Marker
+										onClick={() => showUserModal(user)}
+										key={createKey(user.geocode)}
+										position={{ lat: user.geocode.lng, lng: user.geocode.lat }}
+										icon="https://res.cloudinary.com/wotv/image/upload/v1628629572/logo-receiver_uzfhf3_hswe0x.png"
+										clusterer={clusterer}
+									/>
+								);
+							if (user.role === 'recipient')
+								return (
+									<Marker
+										onClick={() => showUserModal(user)}
+										key={createKey(user.geocode)}
+										position={{ lat: user.geocode.lng, lng: user.geocode.lat }}
+										icon="https://res.cloudinary.com/wotv/image/upload/v1628629651/logo-giver-7_ffly1f_atdi1i.png"
+										clusterer={clusterer}
+									/>
+								);
+							else return null;
+						})
+					}
+				</MarkerClusterer>
 				<DistanceMatrixService
 					options={{
 						destinations: [{ lat: 10.80721641690156, lng: 106.68184289556997 }],
