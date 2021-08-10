@@ -1,25 +1,24 @@
-import React from "react";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import React, { useEffect } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 import { Form } from "react-bootstrap";
+import { geolocated } from "react-geolocated";
+import { DistanceMatrixService } from "@react-google-maps/api";
 
-
-const REACT_APP_GOOGLE_API = process.env.REACT_APP_GOOGLE_API
+const REACT_APP_GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
 const containerStyle = {
-  width: '50vh',
-  height: '50vw'
+  width: "50vh",
+  height: "50vw",
 };
 
 const center = {
   lat: -3.745,
-  lng: -38.523
+  lng: -38.523,
 };
 
-
 const onLoad = (marker) => {
-  console.log('marker: ', marker)
-}
-
+  console.log("marker: ", marker);
+};
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
 Geocode.setApiKey(REACT_APP_GOOGLE_API);
@@ -42,7 +41,6 @@ Geocode.setLocationType("ROOFTOP");
 // Enable or disable logs. Its optional.
 Geocode.enableDebug();
 
-
 // Get latitude & longitude from address.
 Geocode.fromAddress("Eiffel Tower").then(
   (response) => {
@@ -54,38 +52,32 @@ Geocode.fromAddress("Eiffel Tower").then(
   }
 );
 
-
-
-
-
 const Hompage = () => {
-  return ( 
-  <>
-  <Form>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Address</Form.Label>
-    <Form.Control type="email" placeholder="Enter address" />
-    <br></br>
-    <Form.Label>Location info</Form.Label>
-    <Form.Control type="email" placeholder="Enter location info" />
-  </Form.Group>
-  </Form>
-  <LoadScript googleMapsApiKey={REACT_APP_GOOGLE_API}>
-  
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={10}>
-    <Marker
-      onLoad={onLoad}
-      position={center}/>
-    </GoogleMap>
-  </LoadScript>
-  </>
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }, []);
+  console.log("haha");
+  return (
+    <>
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Address</Form.Label>
+          <Form.Control type="email" placeholder="Enter address" />
+          <br></br>
+          <Form.Label>Location info</Form.Label>
+          <Form.Control type="email" placeholder="Enter location info" />
+        </Form.Group>
+      </Form>
+      <LoadScript googleMapsApiKey={REACT_APP_GOOGLE_API}>
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+          <Marker onLoad={onLoad} position={center} />
+        </GoogleMap>
+      </LoadScript>
+    </>
   );
 };
 
 export default Hompage;
-
-
-
