@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -6,8 +7,6 @@ import ShipperPage from "./pages/ShipperPage";
 import PublicNav from "./components/PublicNav/PublicNav";
 import BlogPage from "./pages/BlogPage/BlogPage";
 import ShipperProfilePage from "./pages/ShipperProfilePage";
-
-
 
 function App() {
   return (
