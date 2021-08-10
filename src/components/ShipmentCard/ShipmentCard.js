@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Badge, Button, Container } from "react-bootstrap";
 import ModalShipment from "../ModalShipment/ModalShipment";
 import "./Style.css";
-// import motobike from "../../image/shipper12.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const ShipmentCard = ({ order, handleClick }) => {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -11,11 +10,11 @@ const ShipmentCard = ({ order, handleClick }) => {
       <Container className="shipments_Container">
         <div className="shipment_Contents">
           <div>
-            {/* <img
+            <img
               src={order?.images ? order.images[0] : "holder.js/300px160"}
               alt="img-delivery"
               className="itemShipment_Img"
-            /> */}
+            />
           </div>
           <div className="shipment_Descrip">
             <div className="shipment_body">
