@@ -1,46 +1,42 @@
-import { DistanceMatrixService, GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import React, { useEffect, useState } from 'react'
+import {
+  DistanceMatrixService,
+  GoogleMap,
+  LoadScript,
+  Marker,
+} from "@react-google-maps/api";
+import React, { useEffect, useState } from "react";
 import Geocode from "react-geocode";
 import { Button, Form } from "react-bootstrap";
-import "./style.css"
+import "./style.css";
 
-const Map = () => {
-    const [formData, setFormData] = useState({address: "", content: ""})
-    const [geocode, setGeocode] = useState({
-      lat: 10.77788992345464, 
-      lng: 106.69517319605292
-    })
-    
-  
+const Map = ({ users }) => {
+  const [formData, setFormData] = useState({ address: "", content: "" });
+  const [geocode, setGeocode] = useState({
+    lat: 10.77788992345464,
+    lng: 106.69517319605292,
+  });
+
   useEffect(() => {
-
-    if('geolocation' in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
         console.log("Latitude is :", position.coords.latitude);
-        setGeocode({...geocode, lat: position.coords.latitude })
+        setGeocode({ ...geocode, lat: position.coords.latitude });
         console.log("Longitude is :", position.coords.longitude);
-        setGeocode({...geocode, lng: position.coords.longitude })
-  
-      })
-    }    
-  },[])
+        setGeocode({ ...geocode, lng: position.coords.longitude });
+      });
+    }
+  }, []);
 
-
-
-  const REACT_APP_GOOGLE_API = process.env.REACT_APP_GOOGLE_API
-  console.log(REACT_APP_GOOGLE_API)
+  const REACT_APP_GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
+  console.log(REACT_APP_GOOGLE_API);
   const containerStyle = {
-    width: '100%',
-    height: '100%'
+    width: "100%",
+    height: "100%",
   };
 
-
-
-
   const onLoad = (marker) => {
-    console.log('marker: ', marker)
-  }
-
+    console.log("marker: ", marker);
+  };
 
   // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
   Geocode.setApiKey(REACT_APP_GOOGLE_API);
@@ -63,7 +59,6 @@ const Map = () => {
   // Enable or disable logs. Its optional.
   Geocode.enableDebug();
 
-
   // Get latitude & longitude from address.
   // Geocode.fromAddress("Eiffel Tower").then(
   //   (response) => {
@@ -75,29 +70,26 @@ const Map = () => {
   //   }
   // );
 
-
   const handleOnChange = (e) => {
-    setFormData({...formData, [e.target.name]:e.target.value}) 
-  }
-
-
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const fetchgeocode = await Geocode.fromAddress(formData.address).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
-        return {lat, lng}
+        return { lat, lng };
       },
       (error) => {
         console.error(error);
       }
     );
-      setGeocode(fetchgeocode)
-  } 
+    setGeocode(fetchgeocode);
+  };
 
-    return (
-        /* <Form onSubmit={handleSubmit}>
+  return (
+    /* <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formAddress">
                 <Form.Label>Address</Form.Label>
                 <Form.Control type="text" name="address" placeholder="Enter address" onChange={handleOnChange}/>
@@ -112,34 +104,35 @@ const Map = () => {
                 Submit
             </Button>
         </Form> */
-        <LoadScript googleMapsApiKey={REACT_APP_GOOGLE_API}>
-  
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={geocode}
-      zoom={16}>
-    <Marker
-      onLoad={onLoad}
-      position={{...geocode}}/>10.807121569978163, 106.68194481951569
-    <DistanceMatrixService
-            options={{
-              destinations: [{ lat: 10.80721641690156, lng:  106.68184289556997 }],
-              origins: [{  lat: 10.77788992345464, 
-                lng: 106.69517319605292 }],
-              travelMode: "DRIVING",
-            }}
-            callback={(res) => {
-              console.log("RESPONSE", res);
-              // this.setState({
-              //   totalTime: res.rows[0].elements[0].duration.text,
-              //   totalDistance: res.rows[0].elements[0].distance.text,
-              // });
-            }}/>
+    <LoadScript googleMapsApiKey={REACT_APP_GOOGLE_API}>
+      <GoogleMap mapContainerStyle={containerStyle} center={geocode} zoom={16}>
+        <Marker onLoad={onLoad} position={{ ...geocode }} />
+        {users?.map((user) => {
+          return (
+            <Marker
+              onLoad={onLoad}
+              position={{ lat: user.geocode.lng, lng: user.geocode.lat }}
+            />
+          );
+        })}
 
-    </GoogleMap>
-  </LoadScript>
-  
-    )
-}
+        <DistanceMatrixService
+          options={{
+            destinations: [{ lat: 10.80721641690156, lng: 106.68184289556997 }],
+            origins: [{ lat: 10.77788992345464, lng: 106.69517319605292 }],
+            travelMode: "DRIVING",
+          }}
+          callback={(res) => {
+            console.log("RESPONSE", res);
+            // this.setState({
+            //   totalTime: res.rows[0].elements[0].duration.text,
+            //   totalDistance: res.rows[0].elements[0].distance.text,
+            // });
+          }}
+        />
+      </GoogleMap>
+    </LoadScript>
+  );
+};
 
-export default Map
+export default Map;
