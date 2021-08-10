@@ -4,7 +4,7 @@ import Geocode from 'react-geocode';
 import { Button, Form } from 'react-bootstrap';
 import './style.css';
 
-const Map = () => {
+const Map = ({ users }) => {
 	const [formData, setFormData] = useState({ address: '', content: '' });
 	const [geocode, setGeocode] = useState({
 		lat: 10.77788992345464,
@@ -103,13 +103,16 @@ const Map = () => {
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={geocode}
+				zoom={16}
 				options={{
 					fullscreenControl: false,
 				}}
-				zoom={16}
 			>
 				<Marker onLoad={onLoad} position={{ ...geocode }} />
-				10.807121569978163, 106.68194481951569
+				{users?.map((user) => {
+					return <Marker onLoad={onLoad} position={{ lat: user.geocode.lng, lng: user.geocode.lat }} />;
+				})}
+
 				<DistanceMatrixService
 					options={{
 						destinations: [{ lat: 10.80721641690156, lng: 106.68184289556997 }],
