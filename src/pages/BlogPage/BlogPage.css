@@ -1,0 +1,43 @@
+.home_image {
+  width: 100%;
+  object-fit: contain;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.blog-slogun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blog-tag {
+  box-shadow: 0.2px 8px 8px -4px rgb(84, 87, 88);
+  border-radius: 10px;
+  display: flex;
+  margin: 0 10vw 50px 10vw;
+  min-width: 300px;
+}
+
+.blog-img {
+  object-fit: contain;
+  width: 30vw;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+
+.blog-left-side {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.blog-right-side {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.blog-text {
+  margin-bottom: 30px;
+}
