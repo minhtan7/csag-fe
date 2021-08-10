@@ -1,6 +1,9 @@
-import { combineReducers } from 'redux'
-import blogReducer from './blogs.reducer'
 
+import { combineReducers } from "redux";
+import blogReducer from './blogs.reducer'
+import shpimentReducer from "./shipment.reducer.";
 export default combineReducers({
-    blogReducer: blogReducer,
-})
+  shipment: shpimentReducer,
+      blogReducer: blogReducer,
+});
+
