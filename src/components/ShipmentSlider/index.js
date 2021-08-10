@@ -1,6 +1,5 @@
 import React from "react";
-import "slick-carousel/slick/slick.css";
-import Slider from "react-slick";
+
 // import motobike from "../../image/shipper12.png";
 // import freeshipping from "../../image/shipping.jpeg";
 import "./Style.css";
