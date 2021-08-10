@@ -19,7 +19,7 @@ const Hompage = () => {
   const loading = useSelector((state) => state.user.loading);
   const users = useSelector((state) => state.user.users);
   let pageNum;
-  let limit = 100;
+  let limit = 2000;
   useEffect(() => {
     dispatch(userActions.getAllUsers({ pageNum, limit }));
   }, []);
