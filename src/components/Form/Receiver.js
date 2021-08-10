@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { formActions } from "../../redux/actions/form.action";
+import React from "react";
+import { useSelector } from "react-redux";
 import moment from "moment";
 import { Button } from "react-bootstrap";
 
 const Receiver = () => {
   const singleForm = useSelector((state) => state.form.singleForm);
-  const dispatch = useDispatch();
   return (
     <div className="matching-receiver">
       {singleForm === undefined ? (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Modal, Row } from "react-bootstrap";
+import { Col, Modal, Row } from "react-bootstrap";
 
 const ModalContact = ({ showModalContact, setShowModalContact, order }) => {
   const handleClose = () => setShowModalContact(false);

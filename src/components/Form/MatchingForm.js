@@ -3,12 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/actions/form.action';
 
 const MatchingForm = () => {
+<<<<<<< HEAD
 	const matchingForm = useSelector((state) => state.form.matchingForm);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(formActions.matchingForm({ id: '61123b94cd9bdb5d500dd0a1' }));
 	}, []);
 	// console.log(matchingForm);
+=======
+  const matchingForm = useSelector((state) => state.form.matchingForm);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(formActions.matchingForm({ id: "61123b94cd9bdb5d500dd0a1" }));
+  }, [dispatch]);
+  console.log(matchingForm);
+>>>>>>> e3ce03a4f014512e9d6aaf23bd7db94c3c1b66b9
 
 	return (
 		<div>
