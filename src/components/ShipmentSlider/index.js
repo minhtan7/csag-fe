@@ -1,5 +1,5 @@
-import React from "react";
 
+import React from "react";
 import motobike from "../../image/shipper12.png";
 import freeshipping from "../../image/shipping.jpeg";
 import "./Style.css";

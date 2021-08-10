@@ -8,6 +8,7 @@ const initialState = {
 
 const blogReducer = (state = initialState, action) =>{
     const {type, payload} = action
+
     switch (type) {
         // GET ALL PRODUCT
         case types.GET_ALL_BlOGS_REQUEST:
