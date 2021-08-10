@@ -9,7 +9,7 @@ import { faTimes, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { formActions } from '../../redux/actions/form.action';
 import Donate from '../Donate';
 
-const MainForm = () => {
+const MainForm = ({ handleClose }) => {
 	const page = useSelector((state) => state.form.page);
 	const subPage = useSelector((state) => state.form.subPage);
 	const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const MainForm = () => {
 	return (
 		<div className="m-3 d-flex flex-column main-form w-100">
 			<FontAwesomeIcon className={`form-back-icon ${page === 'index' ? 'disabled' : ''}`} onClick={goBack} icon={faChevronLeft} size="2x" />
-			<FontAwesomeIcon className="form-close-icon" icon={faTimes} size="2x" />
+			<FontAwesomeIcon className="form-close-icon" icon={faTimes} size="2x" onClick={handleClose} />
 			<div className="form-title">Bạn có thể trao gì?</div>
 			<SwitchTransition>
 				<CSSTransition key={[page, subPage]} timeout={{ enter: 300, exit: 300 }} classNames="form">

@@ -58,6 +58,15 @@
 	position: relative;
 }
 
+.form-modal-content {
+	background-color: rgb(255, 255, 255);
+}
+
+@media screen and (min-width: 576px) {
+	.form-modal-content {
+		top: 50px;
+	}
+}
 .form-enter {
 	opacity: 0;
 }
