@@ -28,7 +28,7 @@ function App() {
 			<Switch>
 				<Route exact path="/" component={Hompage} />
 				<Route path="/shipper" component={ShipperPage} />
-				<Route path="/blogpage" component={BlogPage} />
+				<Route path="/blog" component={BlogPage} />
 				<Route path="/shippershipments" component={ShipperProfilePage} />
 			</Switch>
 		</Router>

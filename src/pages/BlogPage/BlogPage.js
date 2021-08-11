@@ -60,8 +60,8 @@ const BlogPage = () => {
 	}, []);
 
 	return (
-		<div className="blog-page">
-			<div
+		<div className="blog-page container">
+			{/* <div
 				onClick={() => {
 					setIsClicked(!isClicked);
 				}}
@@ -83,23 +83,42 @@ const BlogPage = () => {
 						</ul>
 					</li>
 				</ul>
-			</div>
+			</div> */}
 
-			<div className="home">
+			{/* <div className="home">
 				<img className="home_image" src="https://www.caribbeanclimate.bz/wp-content/uploads/revslider/homeslider_boxed/citybg.jpg" alt="banner imgage"></img>
 
 				<div className="blog-slogun">
 					<h1>We have been helping alot. And there will be so much more that we can do!</h1>
 				</div>
-			</div>
+			</div> */}
 
 			{loading ? (
-				<div className="text-center">
+				<div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
 					<ClipLoader color="#f86c6b" size={150} loading={true} />
 				</div>
 			) : (
-				<div>
-					{blogs?.map((blog) => (
+				<div className="container py-5">
+					{blogs?.map(({ imgURL, title, author, _id, content }, index) => (
+						<div className={`d-flex p-5 flex-wrap ${index % 2 ? 'flex-row-reverse' : ''}`}>
+							<div className="col-lg-6">
+								<img src={imgURL} width="100%" />
+								{/* Random */}
+							</div>
+							<div style={{ padding: '50px' }} className="d-flex justify-content-center align-items-center col-lg-6">
+								<div>
+									<div className="d-flex justify-content-between">
+										<div>11 tháng 8, 2021</div>
+										<div>bởi {author}</div>
+									</div>
+									<h1>{title}</h1>
+									<div>{truncate(content, 250)}</div>
+									<h5 className="mt-3">Đọc thêm...</h5>
+								</div>
+							</div>
+						</div>
+					))}
+					{/* {blogs?.map((blog) => (
 						<div className="blog-tag">
 							<div className="blog-left-side">
 								<img atl="blog-img" src={blog.imgURL} className="blog-img" />
@@ -128,9 +147,9 @@ const BlogPage = () => {
 								</Button>
 							</div>
 						</div>
-					))}
+					))} */}
 
-					<MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
+					{/* <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} /> */}
 				</div>
 			)}
 		</div>
