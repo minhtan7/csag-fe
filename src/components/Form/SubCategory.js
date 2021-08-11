@@ -29,7 +29,8 @@ const SubCategory = () => {
 			>
 				{/* <img style={{ width: 100 }} src={`../../images/${choice.type}.jpg`} alt={choice.text} /> */}
 			</div>
-			<div>{choice.text}</div>
+
+			{choice.type === 'other' ? <input placeholder="Tên sản phẩm" /> : <div>{choice.text}</div>}
 			<div className="d-flex justify-content-center align-items-center">
 				<div className="d-flex justify-content-center align-items-center border rounded">
 					<FontAwesomeIcon icon={faMinusSquare} onClick={() => setQuantity(quantity > 0 ? quantity - 1 : 0)} size="2x" color="green" className="quantity-button" />
@@ -38,7 +39,7 @@ const SubCategory = () => {
 					<FontAwesomeIcon onClick={() => setQuantity(quantity + 1)} icon={faPlusSquare} size="2x" color="green" className="quantity-button" />
 				</div>
 			</div>
-			<div> Đơn vị: {choice.type !== 'other' ? choice.unit : ''}</div>
+			<div> Đơn vị: {choice.type !== 'other' ? choice.unit : <input />}</div>
 			{choice.notePlaceholder ? (
 				<div>
 					<label>Ghi chú</label>
