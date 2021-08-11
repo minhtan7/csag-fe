@@ -1,33 +1,60 @@
-import React from 'react'
-import { Button } from 'react-bootstrap';
+import React, { useEffect } from 'react'
+import { Button, Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
+import { ordersActions } from '../redux/actions/order.actions';
+import "./ShipperProfilePage.css"
 
 const ShipperProfilePage = () => {
+    const loading = useSelector(state => state.order.loading)
+    const orders = useSelector(state => state.order.selectedOrder)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(ordersActions.orderShipper())
+    }, [dispatch])
+
     return (
-        <div>
-            <div className="blog-tag">
-                <div className="blog-left-side">
-                    <img alt="blog-img" className="blog-img"/>
-
+        <Container> 
+            {loading ? (
+                <div className="text-center">
+                    <ClipLoader color="#f86c6b" size={150} loading={loading} />
                 </div>
+            ): (
+                <Container>
+                    {orders?.map((order) => (
+                            <div className="shipper-card">
+                                <div className="shipper-upper-content">
+                                    <div>
+                                        <div style={{}}>
+                                            From: {order.from.name}
+                                        </div>
+                                        <div>
+                                            Phone: {order.from.phone}
+                                        </div>
 
-                <div className="blog-right-side">
-                    <div className="blog-text">
-                        <h2>A</h2>
-                    </div>
-                    <div className="blog-text">
-                        B
-                    </div>
-                    <div className="blog-text">
-                        <h2>C</h2>
-                    </div>
-                    <Button variant="success" onClick={(e) => {
-                        
-                        }}>Lấy hàng</Button>
+                                    </div>
 
+                                    <div>
+                                        <div>
+                                            From: {order.to.name}
+                                        </div>
+                                        <div>
+                                            Phone: {order.to.phone}
+                                        </div>
+                                    </div>
+                                </div>
 
-                </div>
-            </div>
-        </div>
+                                <div>
+                                    <Button>{order.status}</Button>
+                                </div>
+
+                            </div>
+                        ))}
+                </Container>
+            )}
+        </Container>
         
     )
 }

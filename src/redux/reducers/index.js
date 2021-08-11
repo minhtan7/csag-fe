@@ -9,6 +9,6 @@ export default combineReducers({
 	blogReducer: blogReducer,
 	order: orderReducer,
 	form: formReducer,
-                                 user: userReducer,
+    user: userReducer,
 
 });

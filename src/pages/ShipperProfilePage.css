@@ -1,0 +1,14 @@
+.shipper-card {
+  border: 1px solid black;
+  margin-bottom: 3vh;
+  margin-top: 8vw;
+  padding: 2vw;
+  border-radius: 10px;
+}
+
+.shipper-upper-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}

@@ -4,6 +4,7 @@ const initialState = {
   shipments: [],
   totalPageNum: 1,
   loading: false,
+
 };
 
 const shpimentReducer = (state = initialState, action) => {
@@ -26,6 +27,7 @@ const shpimentReducer = (state = initialState, action) => {
     case types.GET_SHIPMENTS_FAILURE:
     case types.CREATE_SHIPMENT_FAILURE:
       return { ...state, loading: false };
+      
     default:
       return state;
   }

@@ -64,4 +64,20 @@ const getShipperShipments = (shipperId, status) => async (dispatch) => {
   }
 };
 
-export const shipmentActions = { shipmentsRequest, createShipment, getShipperShipments };
+const getShipmentsStatus = () => async (dispatch) => {
+  dispatch({ type: types.GET_SHIPPER_STATUS_SHIPMENTS_REQUEST, payload: null });
+  try {
+    const res = await api.get("/api/orders/shipper/61126c6cbe87da7300f31129")
+    console.log(res)
+
+    dispatch({
+      type: types.GET_SHIPPER_STATUS_SHIPMENTS_SUCCESS,
+      payload: res.data
+    });
+
+  } catch (err) {
+    dispatch({ type: types.GET_SHIPPER_STATUS_SHIPMENTS_FAILURE, payload: err });
+  }
+};
+
+export const shipmentActions = { shipmentsRequest, createShipment, getShipperShipments, getShipmentsStatus };
