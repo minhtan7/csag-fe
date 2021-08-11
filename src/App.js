@@ -10,6 +10,7 @@ import BlogPage from './pages/BlogPage/BlogPage';
 import ShipperProfilePage from './pages/ShipperProfilePage';
 import { useDispatch } from 'react-redux';
 import { authActions } from './redux/actions/auth.actions';
+import Scrollbars from 'react-custom-scrollbars-2';
 
 function App() {
 	const dispatch = useDispatch();
@@ -24,13 +25,15 @@ function App() {
 	}, [dispatch]);
 	return (
 		<Router>
-			<PublicNav />
-			<Switch>
-				<Route exact path="/" component={Hompage} />
-				<Route path="/shipper" component={ShipperPage} />
-				<Route path="/blog" component={BlogPage} />
-				<Route path="/shippershipments" component={ShipperProfilePage} />
-			</Switch>
+			<Scrollbars style={{ width: '100vw', height: '100vh' }}>
+				<PublicNav />
+				<Switch>
+					<Route exact path="/" component={Hompage} />
+					<Route path="/shipper" component={ShipperPage} />
+					<Route path="/blog" component={BlogPage} />
+					<Route path="/shippershipments" component={ShipperProfilePage} />
+				</Switch>
+			</Scrollbars>
 		</Router>
 	);
 }
