@@ -65,7 +65,7 @@ const initialState = {
 			text: 'Đồ dùng y tế',
 		},
 		donate: { items: [], text: 'Quyên góp chương trình' },
-		// matching: { text: 'Hoàn thành' },
+		matching: { text: 'Hoàn thành' },
 	},
 };
 
