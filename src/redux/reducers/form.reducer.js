@@ -95,8 +95,11 @@ const formReducer = (state = initialState, action) => {
 			const existingIndex = state.items.findIndex((item) => item.name === payload.name);
 			if (state.items.length === 0 || existingIndex < 0) {
 				return { ...state, items: [...state.items, payload] };
+			} else {
+				let items = state.items;
+				items[existingIndex] = payload;
+				return { ...state, items };
 			}
-			return { ...state };
 		case types.CHANGE_PAGE:
 			return { ...state, page: payload, subPage: null };
 		case types.CHANGE_SUBPAGE:
