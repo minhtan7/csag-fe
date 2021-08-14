@@ -12,19 +12,40 @@ import {
 function IndexForm() {
   const dispatch = useDispatch();
   const { menu } = useSelector((state) => state.form);
+  const selectedItems = useSelector((state) => state.form.items);
   const options = Object.keys(menu);
+  console.log({ options });
   return (
     <>
-      {options.map((item) => (
-        <div
-          className={`form-image-button form-${item}`}
-          onClick={() => dispatch(formActions.changePage(item))}
-        >
-          <div className="form-button-text">{menu[item].text}</div>
-          <div className="form-hover"></div>
-          <Image type={item} />
-        </div>
-      ))}
+      {options.map((item) => {
+        if (item != "matching") {
+          return (
+            <div
+              className={`form-image-button form-${item}`}
+              onClick={() => dispatch(formActions.changePage(item))}
+            >
+              <div className="form-button-text">{menu[item].text}</div>
+              <div className="form-hover"></div>
+              <Image type={item} />
+            </div>
+          );
+        } else {
+          return (
+            <div
+              className={`form-image-button form-${item}`}
+              onClick={() => {
+                console.log({ selectedItems });
+                dispatch(formActions.submitItems(selectedItems));
+                dispatch(formActions.changePage(item));
+              }}
+            >
+              <div className="form-button-text">{menu[item].text}</div>
+              <div className="form-hover"></div>
+              <Image type={item} />
+            </div>
+          );
+        }
+      })}
     </>
   );
 }

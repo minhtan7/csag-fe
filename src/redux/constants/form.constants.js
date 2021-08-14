@@ -1,6 +1,7 @@
 export const ADD_ITEM = "FORM.ADD_ITEM";
 export const CHANGE_PAGE = "FORM.CHANGE_PAGE";
 export const CHANGE_SUBPAGE = "FORM.CHANGE_SUBPAGE";
+export const SUBMIT_ITEMS = "FORM.SUBMIT_ITEMS";
 
 export const MATCHING_FORM = "FORM.MATCHING_FORM";
 export const GET_RECEIVER = "FORM.GET_RECEIVER";
